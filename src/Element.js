@@ -11,6 +11,7 @@ class TickerElement extends React.Component {
     children: oneOfType([node, func]).isRequired,
     direction: string.isRequired,
     speed: number.isRequired,
+    scale: number.isRequired,
     id: string.isRequired,
     index: number.isRequired,
     mode: string.isRequired,
@@ -63,7 +64,7 @@ class TickerElement extends React.Component {
   componentDidUpdate = (prevProps, prevState) => {
     if (!this.x && prevState.position.from !== this.state.position.from) {
       this.x = this.state.position.from
-      this.elementRef.current.style.transform = `translate3d(${this.x}px, 0, 0)`
+      this.elementRef.current.style.transform = `translate3d(${this.x * this.props.scale}px, 0, 0)`
     }
     if (this.x !== this.state.position.from &&
       prevProps.prevRect &&
@@ -74,7 +75,7 @@ class TickerElement extends React.Component {
       } else {
         this.x = this.x + (this.props.prevRect.width - prevProps.prevRect.width)
       }
-      this.elementRef.current.style.transform = `translate3d(${this.x}px, 0, 0)`
+      this.elementRef.current.style.transform = `translate3d(${this.x * this.props.scale}px, 0, 0)`
     }
     if (this.props.move && !prevProps.start && this.props.start) {
       this.animate()
@@ -184,7 +185,7 @@ class TickerElement extends React.Component {
       this.x = this.props.direction === 'toLeft'
         ? this.x - (progress / 100 * this.props.speed)
         : this.x + (progress / 100 * this.props.speed)
-      this.elementRef.current.style.transform = `translate3d(${this.x}px, 0, 0)`
+      this.elementRef.current.style.transform = `translate3d(${this.x * this.props.scale}px, 0, 0)`
       this.triggerNext()
 
       if (this.shouldFinish()) {
@@ -207,7 +208,7 @@ class TickerElement extends React.Component {
         position: 'absolute',
         left: 0,
         top: 0,
-        transform: `translate3d(${this.x}px, 0, 0)`
+        transform: `translate3d(${this.x * this.props.scale}px, 0, 0)`
       }}
       ref={this.elementRef}
     >

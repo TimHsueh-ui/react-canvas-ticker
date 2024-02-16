@@ -7,6 +7,7 @@ type Props = {
   move?: boolean,
   offset?: number | "run-in" | string,
   speed?: number,
+  scale?: number,
   height?: number | string,
   onNext?: (index: any) => void,
   onFinish?: () => void

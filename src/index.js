@@ -15,6 +15,7 @@ export default class Ticker extends React.Component {
     move: bool,
     offset: oneOfType([number, string]),
     speed: number,
+    scale: number,
     height: oneOfType([number, string]),
     onNext: func,
     onFinish: func
@@ -23,6 +24,7 @@ export default class Ticker extends React.Component {
   static defaultProps = {
     offset: 0,
     speed: 5,
+    scale: 1,
     direction: 'toLeft',
     mode: 'chain',
     move: true,
@@ -114,7 +116,6 @@ export default class Ticker extends React.Component {
   }
 
   render() {
-
     return (
       <div
         className='ticker'
@@ -140,6 +141,7 @@ export default class Ticker extends React.Component {
                 mode={this.props.mode}
                 move={this.props.move}
                 speed={this.props.speed}
+                scale={this.props.scale}
 
                 onFinish={this.onFinish}
                 onNext={this.onNext}
