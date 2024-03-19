@@ -101,6 +101,9 @@ class TickerElement extends React.Component {
     } = this.props
 
     const rect = this.elementRef.current.getBoundingClientRect()
+    const tempHeight = rect.bottom - rect.y
+    rect.width = Math.sqrt(tempHeight * tempHeight + rect.width * rect.width)
+    
     if (rect.width === 0) return
 
     const offset = this.props.index === 0
